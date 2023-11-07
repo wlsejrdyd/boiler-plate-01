@@ -26,12 +26,21 @@ app.post('/register', (req, res) => {
   // client 회원가입정보 DB 전송
     const user = new User(req.body)
 
-    user.save((err, userInfo) => {
-      if (err) return res.json({ success: false, err })
-      return res.status(200).json({
-        success: true
-      })
-    })
+  //  user.save((err, userInfo) => {
+  //    if (err) return res.json({ success: false, err })
+  //    return res.status(200).json({
+  //      success: true
+  //    })
+  user.save()
+  .then(userInfo => {
+    return res.status(200).json({
+      success: true
+    });
+  })
+  .catch(err => {
+    return res.json({ success: false, err });
+  });
+ 
 })
 
 
